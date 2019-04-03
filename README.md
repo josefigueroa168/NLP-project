@@ -18,6 +18,8 @@ We plan to create a focus identification process through NLP paradigms, to assis
 * python: dnn
 * NLTK
 https://pypi.org/project/dnn/
+* StandfordCoreNLP
+https://nlp.stanford.edu/software/lex-parser.html
 
 
 ## Individual Tasks
