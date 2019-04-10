@@ -30,3 +30,8 @@ https://nlp.stanford.edu/software/lex-parser.html
 	* HMM
 	* LSTM
 * Code a testing suite to test model on new data and predict accuracy (Simple)
+
+## Preprocessing
+* writing shell file now....  
+
+## Focus Identification
