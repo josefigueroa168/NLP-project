@@ -30,3 +30,7 @@ https://nlp.stanford.edu/software/lex-parser.html
 	* HMM
 	* LSTM
 * Code a testing suite to test model on new data and predict accuracy (Simple)
+
+## Paper on the state-of-the-art
+* https://arxiv.org/pdf/1805.05286.pdf
+* Uses Bi-LSTMs, ,lets maybe use a predefined library
