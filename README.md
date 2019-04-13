@@ -31,6 +31,7 @@ https://nlp.stanford.edu/software/lex-parser.html
 	* LSTM
 * Code a testing suite to test model on new data and predict accuracy (Simple)
 
+<<<<<<< HEAD
 ## Preprocessing 
 Run CoreNLP POS tagger
 Put your input file in stanford-postagger-2018-10-16 first
@@ -40,3 +41,8 @@ Put your input file in stanford-postagger-2018-10-16 first
 
 
 ## Focus Identification
+=======
+## Paper on the state-of-the-art
+* https://arxiv.org/pdf/1805.05286.pdf
+* Uses Bi-LSTMs, ,lets maybe use a predefined library
+>>>>>>> origin/master
