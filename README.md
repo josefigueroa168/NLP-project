@@ -32,6 +32,9 @@ https://nlp.stanford.edu/software/lex-parser.html
 * Code a testing suite to test model on new data and predict accuracy (Simple)
 
 <<<<<<< HEAD
+## Installation
+* Download basic English Stanford Tagger version 3.9.2 from https://nlp.stanford.edu/software/tagger.shtml 
+
 ## Preprocessing 
 Run CoreNLP POS tagger
 Put your input file in stanford-postagger-2018-10-16 first
