@@ -87,6 +87,7 @@ def step_two():
 			else:
 				tmp.append(0)
 
+			tmp.append(focuses[index])
 			tmp.append(i)
 			tmp.append(word_tag[1])
 
@@ -120,7 +121,7 @@ data = []
 
 step_one()
 step_two()
-df = pd.DataFrame(data,columns=['word','normalized_words','focus','index','POS','-1POS','-2POS','+1POS','+2POS'])
+df = pd.DataFrame(data,columns=['word','normalized_words','isfocus','focus','index','POS','-1POS','-2POS','+1POS','+2POS'])
 fname = sys.argv[2][:-3] + 'csv'
 df.to_csv(fname,index = None, header=True)
 
