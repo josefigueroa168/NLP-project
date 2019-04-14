@@ -122,7 +122,7 @@ data = []
 step_one()
 step_two()
 df = pd.DataFrame(data,columns=['word','normalized_words','isfocus','focus','index','POS','-1POS','-2POS','+1POS','+2POS'])
-fname = sys.argv[2][:-3] + 'csv'
+fname = sys.argv[1][:-3] + 'csv'
 df.to_csv(fname,index = None, header=True)
 
 
