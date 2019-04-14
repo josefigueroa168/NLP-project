@@ -8,7 +8,7 @@ import pandas as pd
 
 
 def step_one():
-	f = open(sys.argv[2],'r')
+	f = open(sys.argv[1],'r')
 	content = f.readlines()
 
 	w = open('for_pos.txt','w')
