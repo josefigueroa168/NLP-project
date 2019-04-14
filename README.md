@@ -45,6 +45,7 @@ Install NLTK
 	    nltk.download('averaged_perceptron_tagger')
 	    nltk.download('punkt')
 	```
+	if you have problem running the code because of lacking nltk package, following the instructions in the output.
 
 ## Preprocessing 
 ### Training
