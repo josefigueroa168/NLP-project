@@ -33,14 +33,25 @@ https://nlp.stanford.edu/software/lex-parser.html
 
 <<<<<<< HEAD
 ## Installation
-* Download basic English Stanford Tagger version 3.9.2 from https://nlp.stanford.edu/software/tagger.shtml 
+<!-- * Download basic English Stanford Tagger version 3.9.2 from https://nlp.stanford.edu/software/tagger.shtml -->
+* NLTK and wordnet
+install NLTK
+```
+    pip install nltk
+```
+Download Wordnet through NLTK in python console:
+```
+    import nltk
+    nltk.download('wordnet')
+    nltk.download('averaged_perceptron_tagger')
+```
 
 ## Preprocessing 
-Run CoreNLP POS tagger
-Put your input file in stanford-postagger-2018-10-16 first
-  
-    cd stanford-postagger-2018-10-16/
-    ./stanford-postagger.sh models/english-left3words-distsim.tagger input_file.txt > output_file.txt
+Run pre_train.py with training file (contains human annotated amr) e.g. amr-bank-struct-v1.6-training.txt
+
+    python pre_train.py amr-bank-struct-v1.6-training.txt
+
+This will output two files: for_pos.txt, amr-bank-struct-v1.6-training.csv
 
 
 ## Focus Identification
