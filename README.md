@@ -31,7 +31,6 @@ https://nlp.stanford.edu/software/lex-parser.html
 	* LSTM
 * Code a testing suite to test model on new data and predict accuracy (Simple)
 
-<<<<<<< HEAD
 ## Installation
 * NLTK and wordnet  
 Install NLTK
@@ -60,7 +59,7 @@ This will output two files: for_pos.txt, amr-bank-struct-v1.6-training.csv
 
 
 ## Focus Identification
-=======
+
 ## Paper on the state-of-the-art
 * https://arxiv.org/pdf/1805.05286.pdf
 * Uses Bi-LSTMs, ,lets maybe use a predefined library
