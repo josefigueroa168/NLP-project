@@ -33,18 +33,17 @@ https://nlp.stanford.edu/software/lex-parser.html
 
 <<<<<<< HEAD
 ## Installation
-<!-- * Download basic English Stanford Tagger version 3.9.2 from https://nlp.stanford.edu/software/tagger.shtml -->
-* NLTK and wordnet
+* NLTK and wordnet  
 install NLTK
-```
-    pip install nltk
-```
-Download Wordnet through NLTK in python console:
-```
-    import nltk
-    nltk.download('wordnet')
-    nltk.download('averaged_perceptron_tagger')
-```
+	```
+    	pip install nltk
+	```  
+	Download Wordnet through NLTK in python console:
+	```
+	    import nltk
+	    nltk.download('wordnet')
+	    nltk.download('averaged_perceptron_tagger')
+	```
 
 ## Preprocessing 
 ### Training
