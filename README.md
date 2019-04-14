@@ -47,14 +47,14 @@ Download Wordnet through NLTK in python console:
 ```
 
 ## Preprocessing 
-# Training
+### Training
 Run pre_train.py with training file (contains human annotated amr) e.g. amr-bank-struct-v1.6-training.txt
 
     python pre_train.py amr-bank-struct-v1.6-training.txt
 
 This will output two files: for_pos.txt, amr-bank-struct-v1.6-training.csv
 
-# Parsing
+### Parsing
 
 
 
