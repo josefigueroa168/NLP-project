@@ -34,7 +34,7 @@ https://nlp.stanford.edu/software/lex-parser.html
 <<<<<<< HEAD
 ## Installation
 * NLTK and wordnet  
-install NLTK
+Install NLTK
 	```
     	pip install nltk
 	```  
