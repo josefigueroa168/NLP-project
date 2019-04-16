@@ -46,6 +46,19 @@ Install NLTK
 	```
 	if you have problem running the code because of lacking nltk package, following the instructions in the output.
 
+* Gensim
+```
+pip install --upgrade gensim
+```
+or
+```
+conda install -c conda-forge gensim
+```
+* Paramiko
+```
+pip install paramiko
+```
+
 ## Preprocessing 
 ### Training
 Run pre_train.py with training file (contains human annotated amr) e.g. amr-bank-struct-v1.6-training.txt
