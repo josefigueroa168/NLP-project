@@ -83,7 +83,7 @@ lr.fit(X_train, Y_train)
 numeric_train = X_train.values
 predict = lr.predict_proba(numeric_train).tolist()
 correct = 0
-sentence = 0
+total = 0
 for focus, sentence in data_df.groupby('focus'):
     sentence_vec = tag2vec(sentence, tag_map)
     vals = np.array(lr.predict_proba(sentence_vec).tolist())
@@ -91,8 +91,8 @@ for focus, sentence in data_df.groupby('focus'):
     print(index)
     if (sentence.values[index][2] == '1'):
         correct+=1
-    sentence += 1
-
+    total += 1
+"""Logistical Regression"""
     
     
 
