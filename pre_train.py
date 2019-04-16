@@ -98,22 +98,23 @@ def step_two():
 			if i >= 1:
 				tmp.append(pos[i-1][1])
 			else:
-				tmp.append('N/A')
+				tmp.append('XXXX')
 
 			if i > 1:
 				tmp.append(pos[i-2][1])
 			else:
-				tmp.append('N/A')
+				tmp.append('XXXX')
 
 			if i + 1 < len(pos):
 				tmp.append(pos[i+1][1])
 			else:
-				tmp.append('N/A')
+				tmp.append('XXXX')
+				
 
 			if i + 2 < len(pos):
 				tmp.append(pos[i+2][1])
 			else:
-				tmp.append('N/A')
+				tmp.append('XXXX')
 
 			data.append(tmp)
 		
