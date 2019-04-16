@@ -11,12 +11,11 @@ import pandas as pd
 import numpy as np
 from sklearn import svm
 from sklearn.decomposition import PCA
-from sklearn.model_selection import train_test_split
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+from sklearn.linear_model import LogisticRegression as LR
 from sklearn.metrics import confusion_matrix
-import matplotlib.cm as cm
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
-
 
 
 data_df = pd.read_csv("amr-bank-struct-v1.6-training.csv")
@@ -26,6 +25,9 @@ sentences = data_df.loc[:,'POS':'+2POS'].values.tolist()
 model = Word2Vec(sentences)
 words = list(model.wv.vocab)
 
+
+test_data_df = pd.read_csv("amr-bank-struct-v1.6-test.csv")
+test_data_df = test_data_df.applymap(str)
 
 X = model[model.wv.vocab]
 
@@ -41,15 +43,20 @@ tag_map = {}
 for i in range(len(words)):
     tag_map[words[i]] = result[i]
     
-data_df = data_df.loc[:,'POS':'+2POS']
-data_df['POS'] = data_df['POS'].apply(lambda x: tag_map[x])
-data_df['-1POS'] = data_df['-1POS'].apply(lambda x: tag_map[x])
-data_df['-2POS'] = data_df['-2POS'].apply(lambda x: tag_map[x])
-data_df['+1POS'] = data_df['+1POS'].apply(lambda x: tag_map[x])
-data_df['+2POS'] = data_df['+2POS'].apply(lambda x: tag_map[x])
+def tag2vec(data_df, tag_map):
+    trim_data = data_df.loc[:,'POS':'+2POS']
+    trim_data['POS'] = trim_data['POS'].apply(lambda x: tag_map[x])
+    trim_data['-1POS'] = trim_data['-1POS'].apply(lambda x: tag_map[x])
+    trim_data['-2POS'] = trim_data['-2POS'].apply(lambda x: tag_map[x])
+    trim_data['+1POS'] = trim_data['+1POS'].apply(lambda x: tag_map[x])
+    trim_data['+2POS'] = trim_data['+2POS'].apply(lambda x: tag_map[x])
+    return trim_data
+
+trim_data = (data_df, tag_map)
+
 
 X_train, X_test, Y_train, Y_test = train_test_split(
-        data_df, labels, test_size=0.2, random_state=300)
+        trim_data, labels, test_size=0.2, random_state=300)
 
 """ Linear Discrimination Analysis """
 lda = LDA()
@@ -69,6 +76,25 @@ svm_predictions = SVM.predict(X_train)
 confusion_matrix(y_true=Y_train, y_pred=svm_predictions)
 
 """ SVM """
+
+""" Logistical Regression """
+lr = LR(class_weight={'1':2})
+lr.fit(X_train, Y_train)
+numeric_train = X_train.values
+predict = lr.predict_proba(numeric_train).tolist()
+correct = 0
+sentence = 0
+for focus, sentence in data_df.groupby('focus'):
+    sentence_vec = tag2vec(sentence, tag_map)
+    vals = np.array(lr.predict_proba(sentence_vec).tolist())
+    index = np.argmin(vals[:,0])
+    print(index)
+    if (sentence.values[index][2] == '1'):
+        correct+=1
+    sentence += 1
+
+    
+    
 
 """ Both methods fail to predict focus values, will attempt to visualize """
 pca2 = PCA(n_components=2)
