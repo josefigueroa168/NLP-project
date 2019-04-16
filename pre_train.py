@@ -74,20 +74,24 @@ def step_two():
 		
 		assert(len(pos) == len(normalized_words))
 
-		# word in sentence, normalized words, focus or not (0 or 1), index of word, pos, pos for index-1,
+		# focus or not (0 or 1), actual focus word, word in sentence, normalized words, index of word, pos, pos for index-1,
 		# pos for index -2, pos for index +1, pos for index+2
 		for i in range(len(pos)):
 			# print (pos[i])
 			tmp = []
 			word_tag = pos[i]
-			tmp.append(word_tag[0])
-			tmp.append(normalized_words[i])
+
 			if focus_index == i:
 				tmp.append(1)
 			else:
 				tmp.append(0)
-
 			tmp.append(focuses[index])
+
+			tmp.append(word_tag[0])
+			tmp.append(normalized_words[i])
+			
+
+			
 			tmp.append(i)
 			tmp.append(word_tag[1])
 
@@ -121,7 +125,7 @@ data = []
 
 step_one()
 step_two()
-df = pd.DataFrame(data,columns=['word','normalized_words','isfocus','focus','index','POS','-1POS','-2POS','+1POS','+2POS'])
+df = pd.DataFrame(data,columns=['isfocus','focus','word','normalized_words','index','POS','-1POS','-2POS','+1POS','+2POS'])
 fname = sys.argv[1][:-3] + 'csv'
 df.to_csv(fname,index = None, header=True)
 
