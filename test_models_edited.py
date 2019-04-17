@@ -22,16 +22,6 @@ from sklearn.utils import resample
 from sklearn.metrics import f1_score
 import sys
 #%%
-
-def tag2vec(data_df, tag_map):
-    trim_data = data_df.loc[:,'POS':'+2POS']
-    trim_data['POS'] = trim_data['POS'].apply(lambda x: tag_map[x])
-    trim_data['-1POS'] = trim_data['-1POS'].apply(lambda x: tag_map[x])
-    trim_data['-2POS'] = trim_data['-2POS'].apply(lambda x: tag_map[x])
-    trim_data['+1POS'] = trim_data['+1POS'].apply(lambda x: tag_map[x])
-    trim_data['+2POS'] = trim_data['+2POS'].apply(lambda x: tag_map[x])
-    return trim_data
-
 def accuracy(cm):
     return np.trace(cm)/np.sum(cm)
 
@@ -62,25 +52,53 @@ def main():
     # SVM
     SVM = svm.SVC(C = 1.0, kernel = 'rbf', random_state = 0)
     SVM.fit(X_train, Y_train)
-    svm_predictions_train = SVM.predict(X_train)
+    #svm_predictions_train = SVM.predict(X_train)
     svm_predictions_test = SVM.predict(X_test)
     print (SVM.score(X_test,Y_test))
     cm_svm = confusion_matrix(y_true=Y_test, y_pred=svm_predictions_test)
     print (cm_svm)
     print (accuracy(cm_svm))
     print ('f1_score: ',f1_score(y_true=Y_test, y_pred=svm_predictions_test, average='macro')  )
-
+    
+    test_filename = "amr-bank-struct-v1.6-test.csv"
+    test_df = encode(test_filename)
+    X1 = test_df.loc[:,'index':'+2POS'].values
+    Y1 = test_df.loc[:,'isfocus'].values
+    predictions = SVM.predict(X1)
+    print (SVM.score(X1,Y1))
+    cm_svm = confusion_matrix(y_true=Y1, y_pred=predictions)
+    print (cm_svm)
+    print (accuracy(cm_svm))
+    print ('f1_score: ',f1_score(y_true=Y1, y_pred=predictions, average='macro')  )
+    
+    
+    
+    # Logistical Regression (NO)
+    lr = LR()
+    lr.fit(X_train, Y_train)
+    correct = 0
+    total = 0
+    for focus, sentence in df1.groupby('focus'):
+        sentence_vec = sentence.loc[:,'index':'+2POS']
+        vals = np.array(lr.predict_proba(sentence_vec).tolist())
+        index = np.argmin(vals[:,0])
+        if (sentence.values[index][0] == 1):
+            correct+=1
+        total += 1
+    print(correct/total)
+    
+    # LDA
+    lda = LDA()
+    lda.fit_transform(X_train, Y_train)
+    lda_predictions = lda.predict(X_test)
+    print(lda.score(X_test, Y_test))
+    cm_lda = confusion_matrix(y_true=Y_test, y_pred=lda_predictions)
+    print(cm_lda)
+    
+            
 if __name__=="__main__":
     main()
-#%%
 
-data_df = pd.read_csv("data/amr-bank-struct-v1.6-training.csv")
-data_df = data_df.applymap(str)
-labels = data_df.loc[:,'isfocus']
-sentences = data_df.loc[:,'POS':'+2POS'].values.tolist()
-model = Word2Vec(sentences)
-words = list(model.wv.vocab)
-X = model[model.wv.vocab]
 
 #%%
 """ trying another encode way """
@@ -105,41 +123,13 @@ df_downsampled = pd.concat([df_majority_downsampled, df_1])
 X1 = df_downsampled.loc[:,'index':'+2POS'].values
 y1 = df_downsampled.loc[:,'isfocus'].values
 
-#%%
-
-#Dimensionality Reduction
-pca = PCA(n_components=1)
-result = pca.fit_transform(X)
-
-# For Dimensions = 2
-#plt.scatter(result[:, 0], result[:, 1])
-#for i, word in enumerate(words):
-#	plt.annotate(word, xy=(result[i, 0], result[i, 1]))
-
-#Correlate Each tag with a numerical vaue
-tag_map = {}
-for i in range(len(words)):
-    tag_map[words[i]] = result[i]
-    
-#Create a 5 dimension array correlating with each word
-trim_data = (data_df, tag_map)
-
-#%%
-
-#Split to test and train
-# =============================================================================
-# X_train, X_test, Y_train, Y_test = train_test_split(
-#         trim_data, labels, test_size=0.2, random_state=300)
-# =============================================================================
 
 X_train, X_test, Y_train, Y_test = train_test_split(
         X1, y1, test_size=0.25, stratify = y1,random_state=300)
 
 #%%
 """ Linear Discrimination Analysis """
-lda = LDA()
-lda.fit_transform(X_train, Y_train)
-predictions = lda.predict(X_test)
+
 #predictions = lda.predict(X_train)
 # These scores dont account for the importance of actually tagging focus
 lda.score(X_train, Y_train)
@@ -190,7 +180,7 @@ print(correct/total)
 """ Both methods fail to predict focus values, will attempt to visualize """
 # Visualize mapping of each word, too much noise
 pca2 = PCA(n_components=2)
-result = pca2.fit_transform(X_train)
+result = pca2.fit_transform(X_train[:1000])
 color=['red','blue']
 Y_train = np.array(Y_train).astype(int)
 
