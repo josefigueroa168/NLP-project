@@ -63,10 +63,10 @@ pip install paramiko
 ## Preprocessing 
 ### Training
 * Run pre_train.py with training file (contains human annotated amr) e.g. amr-bank-struct-v1.6-training.txt
-
-    python pre_train.py amr-bank-struct-v1.6-training.txt
-	
-This will output two files: for_pos.txt, amr-bank-struct-v1.6-training.csv
+	```
+	    python pre_train.py amr-bank-struct-v1.6-training.txt
+	```	
+	This will output two files: for_pos.txt, amr-bank-struct-v1.6-training.csv
 
 * If you want to us our CNN model, open preprocessing_for_nn.ipynb and change input file name to the the csv file produced from previous step. And change the output file name to the name you want.  
 	* This will output two file: isfocus_fname.npy, word_embedding_fname.npy  
