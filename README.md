@@ -43,6 +43,7 @@ Install NLTK
 	    nltk.download('wordnet')
 	    nltk.download('averaged_perceptron_tagger')
 	    nltk.download('punkt')
+	    nltk.download('word2vec_sample')
 	```
 	if you have problem running the code because of lacking nltk package, following the instructions in the output.
 
@@ -61,11 +62,17 @@ pip install paramiko
 
 ## Preprocessing 
 ### Training
-Run pre_train.py with training file (contains human annotated amr) e.g. amr-bank-struct-v1.6-training.txt
+* Run pre_train.py with training file (contains human annotated amr) e.g. amr-bank-struct-v1.6-training.txt
 
     python pre_train.py amr-bank-struct-v1.6-training.txt
-
+	
 This will output two files: for_pos.txt, amr-bank-struct-v1.6-training.csv
+
+* If you want to us our CNN model, open preprocessing_for_nn.ipynb and change input file name to the the csv file produced from previous step. And change the output file name to the name you want.  
+	* This will output two file: isfocus_fname.npy, word_embedding_fname.npy  
+		* isfocus_fname.npy has an array with dimension S x N  
+		* word_embedding_fname.npy has an array with dimension S x N x 300  
+		* S is the total of sentence in input file, N is number of words in each sentence (not the same for each sentence)
 
 ### Parsing
 
