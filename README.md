@@ -12,6 +12,9 @@ We plan to create a focus identification process through NLP paradigms, to assis
     * Feature 1: Words tag
 	* Feature 2/3: Tag of previous/next word
     * Feature 4/5: Tag of 2nd previous/next word
+* CNN
+  * Download the preprocesseddata from Google drive: https://drive.google.com/open?id=10Ix-i7orrBuVIKLQGSc5x1UFJ4WdbW48
+  * Run the CNN notebook one cell by one cell.
 * Have tokenized sentences
 * tensor flow (dnn)
 ### Libraries
