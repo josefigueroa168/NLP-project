@@ -71,14 +71,14 @@ pip install paramiko
 	```	
 	This will output two files: for_pos.txt, amr-bank-struct-v1.6-training.csv
 
-* If you want to us our CNN model, open preprocessing_for_nn.ipynb and change input file name to the the csv file produced from previous step. And change the output file name to the name you want.  
-	* This will output two file: isfocus_fname.npy, word_embedding_fname.npy  
-		* isfocus_fname.npy has an array with dimension S x N  
-		* word_embedding_fname.npy has an array with dimension S x N x 300  
-		* S is the total of sentence in input file, N is number of words in each sentence (not the same for each sentence)
+* If you want to us our CNN model, open preprocessing_for_nn.ipynb and change input file name to the the csv file produced from previous step. And change the output file name to the name you want. Change mode to "five" to get input file for cnn model. 
+	* This will output two file: isfocus_divby5_fname.npy, word_embedding_divby5_fname.npy  
+		
 
 ### Parsing
-
+* run SVM+LR.py with Spyder and run afterwards post-processing.py
+* run learn_word_embedding_and_keras.ipynb with Jupyter Notebook
+* run CNN_5s.ipynb with Jupyter Notebook (note: the example input file is too big to upload to github. you need to run preprocessing_for_cnn.ipynb and changed )
 
 
 ## Focus Identification
